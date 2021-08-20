@@ -1,0 +1,32 @@
+.clock {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 80vw;
+  padding: 2em;
+
+  border-radius: 50px;
+  background-color: rgba(244, 245, 240, 0.75);
+}
+
+.title {
+  font-size: 2em;
+  margin-bottom: 1em;
+  color: rgba(0, 140, 69, 1);
+}
+
+.timer {
+  display: flex;
+  justify-content: space-evenly;
+  width: 80vw;
+
+  color: rgba(205, 33, 42, 1);
+}
+
+.timecard {
+  font-size: 2.5em;
+  width: 2em;
+  text-align: right;
+  margin: 0.2em;
+}
