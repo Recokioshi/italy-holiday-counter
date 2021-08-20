@@ -1,4 +1,4 @@
-.clock {
+.clock-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -8,6 +8,10 @@
 
   border-radius: 50px;
   background-color: rgba(244, 245, 240, 0.75);
+}
+
+.clock {
+  margin-top: 2em;
 }
 
 .title {

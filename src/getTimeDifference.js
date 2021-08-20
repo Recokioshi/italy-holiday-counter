@@ -1,9 +1,12 @@
-export default (departureDate) => (now) => {
-  const daysLeft = departureDate.diff(now, "days");
-  const hoursLeft = departureDate.diff(now, "hours");
-  const minutesLeft = departureDate.diff(now, "minutes");
-  const secondsLeft = departureDate.diff(now, "seconds");
+const positiveOrZero = (number) => number >=0 ? number : 0;
+
+export default (departureDate, header) => (now) => {
+  const daysLeft = positiveOrZero(departureDate.diff(now, "days"));
+  const hoursLeft = positiveOrZero(departureDate.diff(now, "hours"));
+  const minutesLeft = positiveOrZero(departureDate.diff(now, "minutes"));
+  const secondsLeft = positiveOrZero(departureDate.diff(now, "seconds"));
   return {
+    header,
     daysLeft,
     hoursLeft,
     minutesLeft,

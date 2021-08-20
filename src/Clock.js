@@ -5,26 +5,13 @@ import moment from "moment";
 import { bariDepartureDate, cracowDepartureDate } from "./const";
 import getTimeDifference from "./getTimeDifference";
 
-const getTimeLeftBari = getTimeDifference(bariDepartureDate);
-const getTimeLeftCracow = getTimeDifference(cracowDepartureDate);
+const getTimeLeftBari = getTimeDifference(bariDepartureDate, "Wylot do Italii za...");
+const getTimeLeftCracow = getTimeDifference(cracowDepartureDate, "Wyjazd do Krakowa za...");
 
 export default () => {
   const [now, setNow] = useState(moment());
   const timeLeftBari = useMemo(() => getTimeLeftBari(now), [now]);
   const timeLeftCracow = useMemo(() => getTimeLeftCracow(now), [now]);
-  const timeToDisplay = useMemo(
-    () =>
-      timeLeftCracow.secondsLeft > 0
-        ? {
-            header: "Wyjazd do Krakowa za...",
-            ...timeLeftCracow
-          }
-        : {
-            header: "Wylot do Italii za...",
-            ...timeLeftBari
-          },
-    [timeLeftCracow, timeLeftBari]
-  );
 
   useEffect(() => {
     setTimeout(() => {
@@ -32,15 +19,23 @@ export default () => {
     }, 1000);
   }, [now]);
 
+  const Timer = ({ timeObject }) =>
+      (
+          <div className="clock">
+          <div className="title">{timeObject.header}</div>
+            <div className="timer">
+                <div className="timecard">{timeObject.fullDateLeft.days}d</div>
+                <div className="timecard">{timeObject.fullDateLeft.hours}h</div>
+                <div className="timecard">{timeObject.fullDateLeft.minutes}m</div>
+                <div className="timecard">{timeObject.fullDateLeft.seconds}s</div>
+            </div>
+          </div>
+      )
+
   return (
-    <div className="clock">
-      <div className="title">{timeToDisplay.header}</div>
-      <div className="timer">
-        <div className="timecard">{timeToDisplay.fullDateLeft.days}d</div>
-        <div className="timecard">{timeToDisplay.fullDateLeft.hours}h</div>
-        <div className="timecard">{timeToDisplay.fullDateLeft.minutes}m</div>
-        <div className="timecard">{timeToDisplay.fullDateLeft.seconds}s</div>
-      </div>
+    <div className="clock-wrapper">
+      <Timer timeObject={timeLeftCracow} />
+      <Timer timeObject={timeLeftBari} />
     </div>
   );
 };
